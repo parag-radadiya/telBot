@@ -3,7 +3,7 @@ export const fetchCache = 'force-no-store'
 import connectDB from "../../lib/mongodb";
 import { Bot, webhookCallback } from 'grammy'
 import Feedback from "../../lib/models/Feedback";
-
+import { NextResponse } from "next/server";
 
 // 7993400849:AAHfsxl8nuf2sQdXKyEWd6YJFv9jWVkYf10
 // const token = process.env.TELEGRAM_BOT_TOKEN
@@ -38,4 +38,12 @@ bot.on('message:text', async (ctx) => {
 //   await ctx.reply(ctx.message.text)
 })
 
-export const POST = webhookCallback(bot, 'std/http')
+// export const POST = webhookCallback(bot, 'std/http')
+export async function POST(req: any) {
+  const body = await req.json();
+  return webhookCallback(bot, "next")(req, body);
+}
+
+export async function GET() {
+  return NextResponse.json({ status: "ok" });
+}
