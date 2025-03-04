@@ -28,12 +28,11 @@ bot.on('message:text', async (ctx) => {
   console.log('ctx.message.text text ==== ', text);
   console.log('ctx.message.text chatId ==== ', chatId );
 
-  if (!isNaN(text) && Number(text) >= 0 && Number(text) <= 10) {
-
+  if (!Number.isNaN(text) && Number(text) >= 0 && Number(text) <= 10) {
     await Feedback.create({ userId: chatId, rating: Number(text) });
     ctx.reply("Thanks! Your feedback has been recorded.");
   } else {
-    ctx.reply("Please enter a number between 0 and 10.");
+    ctx.reply("Please enter a valid number between 0 and 10.");
   }
 
 //   await ctx.reply(ctx.message.text)
