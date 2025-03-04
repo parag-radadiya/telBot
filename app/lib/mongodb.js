@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const connectDB = async () => {
   if (mongoose.connection.readyState >= 1) return;
 
+  const dbUrl = "mongodb+srv://parag180410107091:AB9ukyevhOYcBiFY@cluster0.s5srhlv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
